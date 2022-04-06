@@ -2,4 +2,6 @@
     <string name="app_name">a0147662</string>
     <string name="verifyText"> Verify Your Phone Number</string>
     <string name="otptext">An otp will send you on the phone Number</string>
+    <string name="EnterOtp">Enter the OTP to Verify your Phone Number</string>
+
 </resources>
