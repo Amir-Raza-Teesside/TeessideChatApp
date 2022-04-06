@@ -81,7 +81,7 @@
                 android:background="@drawable/text_input_background"
                 android:backgroundTint="#3B673AB7"
                 android:layout_gravity="center"
-                android:padding="6dp"
+                android:padding="5dp"
                 android:inputType='number'
                 app:OtpItemCount="6"
                 app:OtpItemRadius="10dp"
