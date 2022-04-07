@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mukesh.OnOtpCompletionListener;
 
+
 import java.util.concurrent.TimeUnit;
 
 import uk.ac.tees.aad.a0147662.databinding.ActivityOtpBinding;
@@ -27,10 +29,15 @@ import uk.ac.tees.aad.a0147662.databinding.ActivityOtpBinding;
 public class Otp_Activity extends AppCompatActivity {
 
 
+
+
     ActivityOtpBinding binding;
+
+
+
     //TextView Phone;
     FirebaseAuth auth;
-    String PhoneNumber;
+
     String VerificationID;
 
     @Override
@@ -44,7 +51,7 @@ public class Otp_Activity extends AppCompatActivity {
          auth = FirebaseAuth.getInstance();
 
 
-         PhoneNumber = getIntent().getStringExtra("phoneNumber");
+        String PhoneNumber = getIntent().getStringExtra("phoneNumber");
 
         binding.PhoneLabel.setText("Verify" + PhoneNumber);
 
@@ -54,11 +61,14 @@ public class Otp_Activity extends AppCompatActivity {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
+                        Toast.makeText(Otp_Activity.this, "Varification Comppleted",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
 
+
+                        Toast.makeText(Otp_Activity.this, e.getMessage(),Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -66,6 +76,8 @@ public class Otp_Activity extends AppCompatActivity {
                         super.onCodeSent(verfication, forceResendingToken);
 
                         VerificationID = verfication;
+
+                        Log.d("Varifivation codr", verfication);
                     }
                 }).build();
 
@@ -86,12 +98,12 @@ public class Otp_Activity extends AppCompatActivity {
                          if(task.isSuccessful())
                          {
 
-                             Toast.makeText(Otp_Activity.this, "Successfully Logged In",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Otp_Activity.this, "Successfully Logged In",Toast.LENGTH_SHORT).show();
                          }
                          else
                              {
 
-                                 Toast.makeText(Otp_Activity.this, "Wrong Credentials",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Otp_Activity.this, "Wrong Credentials",Toast.LENGTH_SHORT).show();
                              }
 
                      }

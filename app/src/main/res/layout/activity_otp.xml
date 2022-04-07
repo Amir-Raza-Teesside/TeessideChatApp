@@ -78,24 +78,25 @@
                 android:layout_height="wrap_content"
 
 
-                android:background="@drawable/text_input_background"
-                android:backgroundTint="#3B673AB7"
-                android:layout_gravity="center"
-                android:padding="5dp"
+
+                android:itemBackground="#fff"
+                android:focusableInTouchMode="true"
+
                 android:inputType='number'
                 app:OtpItemCount="6"
-                app:OtpItemRadius="10dp"
-                app:OtpItemSpacing="@dimen/cardview_default_elevation"
-                app:OtpLineColor="#000"
+                android:layout_gravity="center"
 
-                app:OtpViewType="rectangle" />
+                app:OtpViewType="line"
+                android:textColor="#000"
+
+                app:OtpLineColor="#0f0" />
 
 
 
 
 
             <Button
-                android:id="@+id/ContinueButton"
+                android:id="@+id/btnsss"
                 android:layout_width="match_parent"
 
 
