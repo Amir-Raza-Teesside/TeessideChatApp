@@ -1,14 +1,13 @@
 package uk.ac.tees.aad.a0147662;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,7 +18,6 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mukesh.OnOtpCompletionListener;
-
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,14 +33,20 @@ public class Otp_Activity extends AppCompatActivity {
 
 
 
-    //TextView Phone;
+
     FirebaseAuth auth;
 
     String VerificationID;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sending the OTP");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         binding = ActivityOtpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -78,6 +82,8 @@ public class Otp_Activity extends AppCompatActivity {
                         VerificationID = verfication;
 
                         Log.d("Varifivation codr", verfication);
+
+                        progressDialog.dismiss();
                     }
                 }).build();
 

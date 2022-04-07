@@ -15,6 +15,7 @@
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent"
+       android:layout_marginTop="60dp"
        android:layout_margin="40dp"
        android:padding="10dp"
        app:srcCompat="@drawable/teesside_circular_logo" />
@@ -75,6 +76,7 @@
              android:backgroundTint="#fff"
              android:drawableLeft="@drawable/ic_baseline_local_phone_24"
              android:hint="Enter a valid Phone No"
+             android:inputType="phone"
              android:padding="10dp" />
 
          <Button

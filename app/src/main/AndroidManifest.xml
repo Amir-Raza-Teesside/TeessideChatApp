@@ -12,12 +12,14 @@
         android:theme="@style/Theme.A0147662">
         <activity
             android:name=".Otp_Activity"
+            android:windowSoftInputMode="stateVisible"
             android:exported="true" />
         <activity
             android:name=".PhoneNumberActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
