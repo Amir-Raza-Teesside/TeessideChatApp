@@ -2,6 +2,7 @@ package uk.ac.tees.aad.a0147662;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -105,6 +106,9 @@ public class Otp_Activity extends AppCompatActivity {
                          {
 
                             Toast.makeText(Otp_Activity.this, "Successfully Logged In",Toast.LENGTH_SHORT).show();
+
+                             Intent intent = new Intent(Otp_Activity.this, UserProfileActivity.class);
+                             startActivity(intent);
                          }
                          else
                              {
