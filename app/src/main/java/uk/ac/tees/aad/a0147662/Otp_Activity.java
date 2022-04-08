@@ -3,6 +3,7 @@ package uk.ac.tees.aad.a0147662;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class Otp_Activity extends AppCompatActivity {
 
     String VerificationID;
     ProgressDialog progressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,7 @@ public class Otp_Activity extends AppCompatActivity {
 
                              Intent intent = new Intent(Otp_Activity.this, UserProfileActivity.class);
                              startActivity(intent);
+                             finishAffinity();
                          }
                          else
                              {
