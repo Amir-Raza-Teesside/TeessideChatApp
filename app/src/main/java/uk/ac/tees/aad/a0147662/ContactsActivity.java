@@ -11,15 +11,54 @@ import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import uk.ac.tees.aad.a0147662.databinding.ActivityContactsBinding;
+
 public class ContactsActivity extends AppCompatActivity {
 
+    ActivityContactsBinding binding;
+    FirebaseDatabase database;
+    ArrayList<User> users;
+    UserAdapter userAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
+        binding = ActivityContactsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
 
         getSupportActionBar().show();
+
+        database = FirebaseDatabase.getInstance();
+
+        users = new ArrayList<>();
+        userAdapter = new UserAdapter(this, users);
+        binding.recyclerview.setAdapter(userAdapter);
+
+        database.getReference().child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                users.clear();
+                for(DataSnapshot snapshot1: snapshot.getChildren())
+                {
+                    User user = snapshot1.getValue(User.class);
+                    users.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
