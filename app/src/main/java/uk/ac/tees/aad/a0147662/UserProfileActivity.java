@@ -1,6 +1,5 @@
 package uk.ac.tees.aad.a0147662;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +40,7 @@ public class UserProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
+        getSupportActionBar().hide();
 
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +77,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 if(selectedImage != null)
                 {
 
+                    dailog = new ProgressDialog(UserProfileActivity.this);
+                    dailog.setMessage("Setting your profile");
+                    dailog.setCancelable(false);
+                    dailog.show();
+
                     StorageReference reference = storage.getReference().child("ProfilePics").child(auth.getUid());
                     reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -95,11 +100,12 @@ public class UserProfileActivity extends AppCompatActivity {
 
                                         User newuser = new User(UID,NAME,Phone,Imageuri);
 
-                                        database.getReference().child("users").setValue(newuser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        database.getReference().child("users").child(UID).setValue(newuser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
 
-                                               Intent intent = new Intent(UserProfileActivity.this, chatActivity.class );
+                                                dailog.dismiss();
+                                               Intent intent = new Intent(UserProfileActivity.this, ContactsActivity.class );
                                                startActivity(intent);
                                                finish();
 
