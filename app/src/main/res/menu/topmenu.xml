@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
 
     <item
-        android:id="@+id/Search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:id="@+id/verticalitem"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:menuCategory="container"
+        android:title="Item"
+        app:showAsAction="always">
 
-        android:title="Search" />
-    <item
-        android:id="@+id/Group"
-        android:title="Group" />
-    <item
-        android:id="@+id/tweet"
-        android:icon="@drawable/teestweet"
-        android:title="TeesTweet" />
-    <item
-        android:id="@+id/invite"
-        android:icon="@drawable/ic_baseline_share_24"
-        android:title="Invite" />
-    <item
-        android:id="@+id/setting"
-        android:icon="@drawable/settingicon"
-        android:title="Setting" />
+
+        <menu>
+
+
+            <item
+                android:id="@+id/Search"
+                android:icon="@drawable/ic_baseline_search_24"
+                android:title="Search"
+
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/group"
+                android:icon="@drawable/ic_baseline_group_24"
+                android:title="Groups"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/tweet"
+                android:icon="@drawable/ic_baseline_insights_24"
+                android:title="Tees Tweet"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/Share"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:title="Share"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/Setting"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="Setting"
+                app:showAsAction="ifRoom" />
+
+        </menu>
+
+
+    </item>
+
+
 </menu>
