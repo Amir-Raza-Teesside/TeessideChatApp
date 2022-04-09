@@ -1,7 +1,7 @@
 package uk.ac.tees.aad.a0147662;
 
 import android.content.Context;
-import android.text.Layout;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +39,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         User user = users.get(position);
         holder.binding.rowUsername.setText(user.getName());
+        Glide.with(context).load(user.getProfilePic())
+                .placeholder(R.drawable.avtar)
+                .into(holder.binding.rowImg);
 
-        Glide.with(context).load(user.getProfilePic()).into(holder.binding.rowImg);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,chatActivity.class);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("Id", user.getUid());
+                context.startActivity(intent);
+
+
+
+            }
+        });
     }
 
     @Override
