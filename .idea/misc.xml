@@ -13,6 +13,9 @@
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.17222222222222222" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.17222222222222222" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.17222222222222222" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/recieve_drawable.xml" value="0.14166666666666666" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/sent_drawable.xml" value="0.14166666666666666" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ss.xml" value="0.14166666666666666" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/text_input_background.xml" value="0.1787037037037037" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/activity_chat.xml" value="0.22" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/activity_contacts.xml" value="0.13677536231884058" />
@@ -20,7 +23,9 @@
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/activity_otp.xml" value="0.3417989417989418" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/activity_phone_number.xml" value="0.3333333333333333" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/activity_user_profile.xml" value="0.3333333333333333" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/layout/receiveitem.xml" value="0.1796875" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/layout/row.xml" value="0.3333333333333333" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/layout/senditem.xml" value="0.5" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/menu/topmenu.xml" value="0.1796875" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
