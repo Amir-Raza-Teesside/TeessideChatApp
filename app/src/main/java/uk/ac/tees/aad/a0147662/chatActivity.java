@@ -10,7 +10,7 @@ import uk.ac.tees.aad.a0147662.databinding.ActivityChatBinding;
 public class chatActivity extends AppCompatActivity {
 
     ActivityChatBinding binding;
-    @SuppressLint("RestrictedApi")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,18 +18,18 @@ public class chatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-       // String name = getIntent().getStringExtra("Name");
-       // String id =  getIntent().getStringExtra("Id");
+        String name = getIntent().getStringExtra("Name");
+        String id =  getIntent().getStringExtra("Id");
 
-      //  getSupportActionBar().setTitle(name);
-      //  getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+       getSupportActionBar().setTitle(name);
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
 
-   /* @Override
+   @Override
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
-    }*/
+    }
 }
