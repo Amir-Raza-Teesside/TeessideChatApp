@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +40,8 @@ public class chatActivity extends AppCompatActivity {
         binding.chatrecylerview.setLayoutManager(new LinearLayoutManager(this));
         binding.chatrecylerview.setAdapter(messagesAdapter);
 
-        database = FirebaseDatabase.getInstance();
+
+
 
         String name = getIntent().getStringExtra("Name");
         String recieveruid =  getIntent().getStringExtra("Id");
@@ -48,6 +50,27 @@ public class chatActivity extends AppCompatActivity {
 
         SenderRoom =  senderUid + recieveruid;
         Recieverroom = recieveruid + senderUid;
+        database = FirebaseDatabase.getInstance();
+
+        database.getReference().child("chats")
+                .child(SenderRoom).child("messages").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messages.clear();
+                for(DataSnapshot snapshot1 : snapshot.getChildren())
+                {
+                    Message msg = snapshot1.getValue(Message.class);
+                    messages.add(msg);
+                }
+                messagesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(chatActivity.this, "Messages Failed to load", Toast.LENGTH_LONG).show();
+            }
+        });
 
         binding.sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,25 +81,7 @@ public class chatActivity extends AppCompatActivity {
 
                 Message msg = new Message(message,senderUid, date.getTime());
                 binding.Mymsg.setText("");
-                database.getReference().child("chats").child(SenderRoom)
-                        .child("messages").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        messages.clear();
-                        for(DataSnapshot dataSnapshot1: snapshot.getChildren())
-                        {
-                            Message message1 = dataSnapshot1.getValue(Message.class);
-                            messages.add(message1);
-                        }
-                        messagesAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
                 database.getReference().child("chats").child(SenderRoom)
                         .child("messages").push().setValue(msg).addOnSuccessListener(new OnSuccessListener<Void>() {

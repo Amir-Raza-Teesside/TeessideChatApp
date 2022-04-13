@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/background_theme.xml" value="0.14722222222222223" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/chat_receiver_bubble.xml" value="0.1494140625" />
+        <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/chat_sender_bubble.xml" value="0.14166666666666666" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_auto_awesome_24.xml" value="0.17222222222222222" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.17222222222222222" />
         <entry key="..\:/Projects/a0147662/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.17222222222222222" />
