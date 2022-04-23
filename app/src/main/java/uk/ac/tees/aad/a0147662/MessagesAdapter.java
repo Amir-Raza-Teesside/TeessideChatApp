@@ -44,7 +44,7 @@ public class MessagesAdapter extends  RecyclerView.Adapter {
             {
                 View view = LayoutInflater.from(context).inflate(R.layout.receiveitem, parent, false);
 
-                return  new SentViewHolder(view);
+                return  new RecieveViewHolder(view);
             }
 
     }
@@ -53,14 +53,20 @@ public class MessagesAdapter extends  RecyclerView.Adapter {
     public int getItemViewType(int position) {
 
         Message message = messages.get(position);
-        if(FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
+        if(!FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
         {
             return  ITEM_SENT;
         }
-        else
+        else if(FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
+        {
+            return  ITEM_Recieve;
+        }
 
+
+
+        else
             {
-                return  ITEM_Recieve;
+                return 3;
             }
 
 
@@ -79,7 +85,7 @@ public class MessagesAdapter extends  RecyclerView.Adapter {
            else
                {
                    RecieveViewHolder viewHolder = (RecieveViewHolder) holder;
-                   viewHolder.binding.recMsg.setText(message.getMessage());
+                   viewHolder.binding.recvdmsg.setText(message.getMessage());
                }
     }
 

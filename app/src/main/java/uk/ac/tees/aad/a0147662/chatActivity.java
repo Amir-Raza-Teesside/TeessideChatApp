@@ -1,13 +1,12 @@
 package uk.ac.tees.aad.a0147662;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +27,8 @@ public class chatActivity extends AppCompatActivity {
     ArrayList<Message> messages;
     String SenderRoom, Recieverroom;
     FirebaseDatabase database;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,11 @@ public class chatActivity extends AppCompatActivity {
         Recieverroom = recieveruid + senderUid;
         database = FirebaseDatabase.getInstance();
 
-        database.getReference().child("chats")
-                .child(SenderRoom).child("messages").addValueEventListener(new ValueEventListener() {
+        database.getReference()
+                .child("chats")
+                .child(SenderRoom)
+                .child("messages")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messages.clear();
@@ -63,7 +67,9 @@ public class chatActivity extends AppCompatActivity {
                     messages.add(msg);
                 }
                 messagesAdapter.notifyDataSetChanged();
+
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -79,23 +85,33 @@ public class chatActivity extends AppCompatActivity {
                 String  message =  binding.Mymsg.getText().toString();
                 Date date = new Date();
 
-                Message msg = new Message(message,senderUid, date.getTime());
+                Message messages = new Message(message,senderUid, date.getTime());
                 binding.Mymsg.setText("");
 
 
-                database.getReference().child("chats").child(SenderRoom)
-                        .child("messages").push().setValue(msg).addOnSuccessListener(new OnSuccessListener<Void>() {
+                database.getReference()
+                        .child("chats")
+                        .child(SenderRoom)
+                        .child("messages")
+                        .push()
+                        .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 
-
-                         database.getReference().child("chats").child(Recieverroom).child("messages").push()
-                                .setValue(msg).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        database.getReference()
+                                .child("chats")
+                                .child(Recieverroom)
+                                .child("messages")
+                                .push()
+                                .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
 
+
+
                             }
                         });
+
                     }
                 });
             }
