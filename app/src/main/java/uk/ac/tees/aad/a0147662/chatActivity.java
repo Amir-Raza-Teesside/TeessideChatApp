@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import uk.ac.tees.aad.a0147662.databinding.ActivityChatBinding;
 
@@ -88,12 +89,20 @@ public class chatActivity extends AppCompatActivity {
                 Message messages = new Message(message,senderUid, date.getTime());
                 binding.Mymsg.setText("");
 
+                String RandomKey = database.getReference().push().getKey();
+                HashMap<String, Object> Last_msg = new HashMap<>();
+                Last_msg.put("lastMsg", messages.getMessage());
+                Last_msg.put("lstmsgtime", date.getTime());
+
+                database.getReference().child("chats").child(SenderRoom).updateChildren(Last_msg);
+
+                database.getReference().child("chats").child(Recieverroom).updateChildren(Last_msg);
 
                 database.getReference()
                         .child("chats")
                         .child(SenderRoom)
                         .child("messages")
-                        .push()
+                        .child(RandomKey)
                         .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -102,7 +111,7 @@ public class chatActivity extends AppCompatActivity {
                                 .child("chats")
                                 .child(Recieverroom)
                                 .child("messages")
-                                .push()
+                                .child(RandomKey)
                                 .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -111,6 +120,7 @@ public class chatActivity extends AppCompatActivity {
 
                             }
                         });
+
 
                     }
                 });

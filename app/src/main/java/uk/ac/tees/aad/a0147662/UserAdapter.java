@@ -10,8 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import uk.ac.tees.aad.a0147662.databinding.RowBinding;
 
@@ -38,6 +45,42 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
 
         User user = users.get(position);
+        String senderId = FirebaseAuth.getInstance().getUid();
+
+        String SenderRoom = senderId + user.getUid();
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("chats")
+                .child(SenderRoom)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.exists()){
+                        String lastmsg = snapshot.child("lastMsg").getValue(String.class);
+                        long time = snapshot.child("lstmsgtime").getValue(long.class);
+
+                            SimpleDateFormat format = new SimpleDateFormat("hh:mm:s");
+
+                        holder.binding.rowLastmsg.setText(lastmsg);
+                        holder.binding.rowLastseen.setText(format.format(new Date(time)));
+                        }
+                        else
+                            {
+                                holder.binding.rowLastmsg.setText("Tap to chat");
+
+                            }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
         holder.binding.rowUsername.setText(user.getName());
         Glide.with(context).load(user.getProfilePic())
                 .placeholder(R.drawable.avtar)
