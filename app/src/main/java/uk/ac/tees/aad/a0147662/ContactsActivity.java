@@ -62,10 +62,7 @@ public class ContactsActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
 
-        binding.StatusList.setAdapter(topStatusAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        binding.StatusList.setLayoutManager(layoutManager);
+
 
 
         users = new ArrayList<>();
@@ -76,6 +73,11 @@ public class ContactsActivity extends AppCompatActivity {
         topStatusAdapter = new TopStatusAdapter(this, userStatuses);
 
         binding.recyclerview.setAdapter(userAdapter);
+
+        binding.StatusList.setAdapter(topStatusAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        binding.StatusList.setLayoutManager(layoutManager);
 
         database.getReference().child("users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,7 +100,11 @@ public class ContactsActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot1: snapshot.getChildren())
                 {
                     User user = snapshot1.getValue(User.class);
-                    users.add(user);
+                    if(!user.getUid().equals(FirebaseAuth.getInstance().getUid()))
+                    {
+                        users.add(user);
+                    }
+
                 }
                 userAdapter.notifyDataSetChanged();
             }
@@ -115,6 +121,7 @@ public class ContactsActivity extends AppCompatActivity {
 
                 if(snapshot.exists())
                 {
+                    userStatuses.clear();
                     for(DataSnapshot snapshot1: snapshot.getChildren())
                     {
                         UserStatus userStatus = new UserStatus();

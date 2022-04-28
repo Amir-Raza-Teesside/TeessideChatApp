@@ -2,6 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C3FFFFFF"
+    android:padding="4dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -17,6 +20,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="75dp"
+            android:id="@+id/statusimg"
             android:layout_height="75dp"
             android:layout_centerInParent="true"
             android:padding="6dp"
@@ -27,7 +31,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_centerInParent="true"
-            app:portion_color="#121212"
+            app:portion_color="#673AB7"
             app:portion_spacing="4dp"
             app:portion_width="4dp"
             app:portions_count="8" />
