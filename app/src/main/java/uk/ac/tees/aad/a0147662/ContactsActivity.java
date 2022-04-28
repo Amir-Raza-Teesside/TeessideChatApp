@@ -122,6 +122,14 @@ public class ContactsActivity extends AppCompatActivity {
                         userStatus.setProfileImage(snapshot1.child("ProfileImage").getValue(String.class));
                         userStatus.setLastUpdated(snapshot1.child("LastUpdated").getValue(Long.class));
 
+                        ArrayList<Status> statuses = new ArrayList<>();
+                        for(DataSnapshot statusSnapShot:snapshot1.child("statuses").getChildren())
+                        {
+                            Status sampleStatus = statusSnapShot.getValue(Status.class);
+                            statuses.add(sampleStatus);
+                        }
+                        userStatus.setStatuses(statuses);
+
                         userStatuses.add(userStatus);
 
                     }
