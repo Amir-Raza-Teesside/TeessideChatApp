@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -53,11 +54,11 @@ public class MessagesAdapter extends  RecyclerView.Adapter {
     public int getItemViewType(int position) {
 
         Message message = messages.get(position);
-        if(!FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
+        if(FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
         {
             return  ITEM_SENT;
         }
-        else if(FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
+        else if(!FirebaseAuth.getInstance().getUid().equals(message.getSenderid()))
         {
             return  ITEM_Recieve;
         }
@@ -78,13 +79,26 @@ public class MessagesAdapter extends  RecyclerView.Adapter {
         Message message = messages.get(position);
            if(holder.getClass() == SentViewHolder.class)
            {
-
                SentViewHolder viewHolder = (SentViewHolder) holder;
+               if(message.getMessage().equals("photo"))
+               {
+                   viewHolder.binding.imageViewsent.setVisibility(View.VISIBLE);
+                   viewHolder.binding.msg.setVisibility(View.GONE);
+                   Glide.with(context).load(message.getImageUrl()).placeholder(R.drawable.avtar)
+                           .into(viewHolder.binding.imageViewsent);
+               }
                viewHolder.binding.msg.setText(message.getMessage());
            }
            else
                {
                    RecieveViewHolder viewHolder = (RecieveViewHolder) holder;
+                   if(message.getMessage().equals("photo"))
+                   {
+                       viewHolder.binding.imageViewrecieve.setVisibility(View.VISIBLE);
+                       viewHolder.binding.recvdmsg.setVisibility(View.GONE);
+                       Glide.with(context).load(message.getImageUrl())
+                               .placeholder(R.drawable.avtar).into(viewHolder.binding.imageViewrecieve);
+                   }
                    viewHolder.binding.recvdmsg.setText(message.getMessage());
                }
     }

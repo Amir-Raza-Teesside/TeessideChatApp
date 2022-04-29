@@ -1,8 +1,21 @@
 package uk.ac.tees.aad.a0147662;
 
 public class Message {
-    private  String messageId, message, senderid;
+    private  String messageId;
+    private String message;
+    private String senderid;
+    private String imageUrl;
     private  long timestamp;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
 
 
     public  Message()

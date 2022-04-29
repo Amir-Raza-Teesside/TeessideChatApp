@@ -38,6 +38,8 @@ public class chatActivity extends AppCompatActivity {
     String SenderRoom, Recieverroom;
     FirebaseDatabase database;
     FirebaseStorage storage;
+    String senderUid;
+    String recieveruid;
 
 
 
@@ -56,9 +58,9 @@ public class chatActivity extends AppCompatActivity {
 
 
         String name = getIntent().getStringExtra("Name");
-        String recieveruid =  getIntent().getStringExtra("Id");
+         recieveruid =  getIntent().getStringExtra("Id");
 
-        String senderUid = FirebaseAuth.getInstance().getUid();
+        senderUid = FirebaseAuth.getInstance().getUid();
 
         SenderRoom =  senderUid + recieveruid;
         Recieverroom = recieveruid + senderUid;
@@ -181,6 +183,49 @@ public class chatActivity extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         String filePath = uri.toString();
+                                        String  message =  binding.Mymsg.getText().toString();
+                                        Date date = new Date();
+
+                                        Message messages = new Message(message,senderUid, date.getTime());
+                                        messages.setImageUrl(filePath);
+                                        messages.setMessage("photo");
+                                        binding.Mymsg.setText("");
+
+                                        String RandomKey = database.getReference().push().getKey();
+                                        HashMap<String, Object> Last_msg = new HashMap<>();
+                                        Last_msg.put("lastMsg", messages.getMessage());
+                                        Last_msg.put("lstmsgtime", date.getTime());
+
+                                        database.getReference().child("chats").child(SenderRoom).updateChildren(Last_msg);
+
+                                        database.getReference().child("chats").child(Recieverroom).updateChildren(Last_msg);
+
+                                        database.getReference()
+                                                .child("chats")
+                                                .child(SenderRoom)
+                                                .child("messages")
+                                                .child(RandomKey)
+                                                .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+
+                                                database.getReference()
+                                                        .child("chats")
+                                                        .child(Recieverroom)
+                                                        .child("messages")
+                                                        .child(RandomKey)
+                                                        .setValue(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+
+
+
+                                                    }
+                                                });
+
+
+                                            }
+                                        });
                                         Toast.makeText(chatActivity.this,filePath.toString(),Toast.LENGTH_LONG).show();
                                     }
                                 });
