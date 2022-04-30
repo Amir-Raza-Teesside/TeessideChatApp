@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.A0147662">
         <activity
+            android:name=".TweetActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TweetDoActivity"
+            android:exported="true" />
+        <activity
             android:name=".chatActivity"
             android:exported="true" />
         <activity

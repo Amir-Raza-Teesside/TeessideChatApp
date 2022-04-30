@@ -79,6 +79,7 @@ public class ContactsActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         binding.StatusList.setLayoutManager(layoutManager);
 
+
         database.getReference().child("users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -162,6 +163,11 @@ public class ContactsActivity extends AppCompatActivity {
                         intent.setAction(Intent.ACTION_GET_CONTENT);
                         startActivityForResult(intent, 75);
                         break;
+                    case R.id.calls:
+                        Intent intent1 = new Intent(ContactsActivity.this, TweetActivity.class);
+                        startActivity(intent1);
+                        break;
+
 
                 }
 
@@ -179,6 +185,8 @@ public class ContactsActivity extends AppCompatActivity {
 
            case R.id.tweet:
                Toast.makeText(ContactsActivity.this,"JKHJKHKJK",Toast.LENGTH_LONG).show();
+               Intent intent = new Intent(ContactsActivity.this,TweetDoActivity.class);
+               startActivity(intent);
                break;
            case R.id.group:
                Toast.makeText(ContactsActivity.this,"Create Group",Toast.LENGTH_LONG).show();
