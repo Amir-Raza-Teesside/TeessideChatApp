@@ -54,6 +54,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     implementation 'com.github.3llomi:CircularStatusView:V1.0.2'
     implementation 'com.github.OMARIHAMZA:StoryView:1.0.2-alpha'
+    implementation 'com.airbnb.android:lottie:5.0.3'
 
 
 
